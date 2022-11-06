@@ -46,25 +46,29 @@ enum {
 //	结构体声明
 //	
 typedef struct {
-	u32						size;		//	元素数
-	u8*						dat;		//	顶部
+	u32						room;		//	分配空间
+	u32						size;		//	已有成员
+	u8*						dat;		//	数据头
 	}_rQueue;
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //----------------------------------------------------------------------------------------------------
 //	函数声明
 //	
-_rQueue	*	CREAT8_rQueue	(void);
-u8			PUSH8_rQueue	(_rQueue* queues, u8 dat);
-u8			POP8_rQueue		(_rQueue* queues);
-u8			TOP8_rQueue		(_rQueue* queues, u8* dat);
-u8			SIZE8_rQueue	(_rQueue* queues, u32* dat);
+_rQueue	*	CREAT8_rQueue	(void);							//	创建一个队列
+u8			DEL8_rQueue		(_rQueue* queues);				//	删除一个队列
+u8			PUSH8_rQueue	(_rQueue* queues, u8 dat);		//	向一个队列压入数据
+u8			POP8_rQueue		(_rQueue* queues);				//	弹出一个队列的数据
+u8			CLS8_rQueue		(_rQueue* queues);				//	清除一个队列的冗余空间
+u8			TOP8_rQueue		(_rQueue* queues, u8* dat);		//	出示队列的一个数据
+u8			SIZE8_rQueue	(_rQueue* queues, u32* dat);	//	出示队列的成员数
+u8			ROOM8_rQueue	(_rQueue* queues, u32* dat);	//	出示队列的占用空间
 //----------------------------------------------------------------------------------------------------
-u8			POPTOP8_rQueue	(_rQueue* queues);
-u32			SIZEMEM8_rQueue	(_rQueue* queues);
+u8			POPTOP8_rQueue	(_rQueue* queues);				//	弹出并出示队列的顶端
+u32			SIZEMEM8_rQueue	(_rQueue* queues);				//	出示队列的占用空间
 //----------------------------------------------------------------------------------------------------
-_rQueue*	CREAT32_rQueue	(void);
-u8			PUSH32_rQueue	(_rQueue* queues, u32 dat);
-u32			POPTOP32_rQueue	(_rQueue* queues);
-void		(*POPTOPFUN_rQueue(_rQueue* queues))(void);
+_rQueue*	CREAT32_rQueue	(void);							//	创造一个32位的队列
+u8			PUSH32_rQueue	(_rQueue* queues, u32 dat);		//	压入一个32位元素
+u32			POPTOP32_rQueue	(_rQueue* queues);				//	弹出并出示一个32位的元素
+void		(*POPTOPFUN_rQueue(_rQueue* queues))(void);		//	弹出一个void(void)函数
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif

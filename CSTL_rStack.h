@@ -39,31 +39,36 @@ enum {
 	STACKS_NULL,
 	STACKS_EMPTY,
 	STACKS_REAL_ERROR,
-	STACKS_MALL_ERROR};
+	STACKS_MALL_ERROR
+};
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //----------------------------------------------------------------------------------------------------
-//	结构体定义
+//	结构体声明
 //	
 typedef struct {
-	u32						size;		//	元素数
-	u8*						dat;		//	顶部
+	u32						room;		//	分配空间
+	u32						size;		//	已有成员
+	u8*						dat;		//	数据头
 	}_rStack;
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //----------------------------------------------------------------------------------------------------
-//	程序声明
+//	函数声明
 //	
-_rStack*	CREAT8_rStack	(void);
-u8			PUSH8_rStack	(_rStack* stacks, u8 dat);
-u8			POP8_rStack		(_rStack* stacks);
-u8			TOP8_rStack		(_rStack* stacks, u8* dat);
-u8			SIZE8_rStack	(_rStack* stacks, u32* dat);
+_rStack* CREAT8_rStack(void);							//	创建一个栈
+u8			DEL8_rStack(_rStack* queues);				//	删除一个栈
+u8			PUSH8_rStack(_rStack* queues, u8 dat);		//	向一个栈压入数据
+u8			POP8_rStack(_rStack* queues);				//	弹出一个栈的数据
+u8			CLS8_rStack(_rStack* queues);				//	清除一个栈的冗余空间
+u8			TOP8_rStack(_rStack* queues, u8* dat);		//	出示栈的一个数据
+u8			SIZE8_rStack(_rStack* queues, u32* dat);	//	出示栈的成员数
+u8			ROOM8_rStack(_rStack* queues, u32* dat);	//	出示栈的占用空间
 //----------------------------------------------------------------------------------------------------
-u8			POPTOP8_rStack	(_rStack* stacks);
-u32			SIZEMEM8_rStack	(_rStack* stacks);
+u8			POPTOP8_rStack(_rStack* queues);			//	弹出并出示栈的顶端
+u32			SIZEMEM8_rStack(_rStack* queues);			//	出示栈的占用空间
 //----------------------------------------------------------------------------------------------------
-_rStack*	CREAT32_rStack	(void);
-u8			PUSH32_rStack	(_rStack* stacks, u32 dat);
-u32			POPTOP32_rStack	(_rStack* stacks);
-void		(*POPTOPFUN_rStack(_rStack* stacks))(void);
+_rStack*	CREAT32_rStack(void);						//	创造一个32位的栈
+u8			PUSH32_rStack(_rStack* queues, u32 dat);	//	压入一个32位元素
+u32			POPTOP32_rStack(_rStack* queues);			//	弹出并出示一个32位的元素
+void		(*POPTOPFUN_rStack(_rStack* queues))(void);	//	弹出一个void(void)函数
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif
